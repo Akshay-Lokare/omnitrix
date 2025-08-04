@@ -1,3 +1,34 @@
+.nav-container {
+  position: fixed;      /* Make it stay on top */
+  top: 0;               /* Align to the top of the page */
+  left: 0;
+  right: 0;
+  z-index: 1000;        /* Ensure it's above other content */
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-top: 60px;
+}
+
+.nav-button {
+  text-decoration: none;
+  color: #0b3d0b;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.3s;
+  border: none;
+  font-size: 1rem;
+}
+
+.nav-button:hover {
+  background-color: #08b751;
+  transform: scale(1.05);
+  color: #fff;
+  cursor: pointer;
+}
+
 .center-container {
   min-height: 100vh;
   display: flex;
