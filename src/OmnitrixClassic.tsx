@@ -2,17 +2,10 @@ import React, { useEffect, useState } from "react";
 
 const OmnitrixClassic: React.FC = () => {
   const ALIENS = [
-    "diamondhead",
-    "fourarms",
-    "ghostfreak",
-    "greymatter",
-    "heatblast",
-    "ripjaws",
-    "stinkfly",
-    "upgrade",
-    "wildmutt",
-    "xlr8",
+    "diamondhead", "fourarms", "ghostfreak", "greymatter", "heatblast",
+    "ripjaws", "stinkfly", "upgrade", "wildmutt", "xlr8",
   ];
+
   const imagesUrl = "./images/";
   const soundsUrl = "./sounds/";
 
@@ -42,6 +35,9 @@ const OmnitrixClassic: React.FC = () => {
 
   const [currentAlien, setCurrentAlien] = useState(0);
   const [rotationDeg, setRotationDeg] = useState(0);
+  const [innerCircleColor, setInnerCircleColor] = useState<"#baff13" | "white" | "red">("#baff13");
+  const [overlayColor, setOverlayColor] = useState<"" | "#baff13" | "red">("");
+  const [isLocked, setIsLocked] = useState(false);
 
   const playRandomTwistSound = () => {
     const index = Math.floor(Math.random() * twistSounds.length);
@@ -55,19 +51,45 @@ const OmnitrixClassic: React.FC = () => {
   };
 
   const nextAlien = () => {
-    setCurrentAlien((prev) => (prev + 1) % ALIENS.length);
-    setRotationDeg((prev) => prev + 36);
-    playRandomTwistSound();
+    if (!isLocked) {
+      setCurrentAlien((prev) => (prev + 1) % ALIENS.length);
+      setRotationDeg((prev) => prev + 36);
+      playRandomTwistSound();
+    }
   };
 
   const prevAlien = () => {
-    setCurrentAlien((prev) => (prev - 1 + ALIENS.length) % ALIENS.length);
-    setRotationDeg((prev) => prev - 36);
-    playRandomTwistSound();
+    if (!isLocked) {
+      setCurrentAlien((prev) => (prev - 1 + ALIENS.length) % ALIENS.length);
+      setRotationDeg((prev) => prev - 36);
+      playRandomTwistSound();
+    }
   };
 
   const activateOmnitrix = () => {
     playTransformationSound();
+
+    if (innerCircleColor === "#baff13") {
+      setInnerCircleColor("white");
+      setOverlayColor("#baff13");
+      setIsLocked(true);
+
+      setTimeout(() => {
+        setOverlayColor("");
+      }, 2000);
+
+    } else if (innerCircleColor === "white") {
+      setInnerCircleColor("red");
+      setOverlayColor("red");
+
+      setTimeout(() => {
+        setOverlayColor("");
+        setTimeout(() => {
+          setInnerCircleColor("#baff13");
+          setIsLocked(false);
+        }, 3000);
+      }, 2000);
+    }
   };
 
   useEffect(() => {
@@ -79,17 +101,26 @@ const OmnitrixClassic: React.FC = () => {
 
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, []);
+  }, [innerCircleColor, isLocked]);
 
   return (
     <div className="center-container">
-      <div className="outer-circle" style={{ transform: `rotate(${rotationDeg}deg)` }}>
-        <div className="side-dot top"></div>
-        <div className="side-dot right"></div>
-        <div className="side-dot bottom"></div>
-        <div className="side-dot left"></div>
+      <div
+        className="outer-circle"
+        style={{ transform: `rotate(${rotationDeg}deg)` }}
+      >
+        <div className="side-dot top" />
+        <div className="side-dot right" />
+        <div className="side-dot bottom" />
+        <div className="side-dot left" />
 
-        <div className="inner-circle" style={{ transform: `rotate(${-rotationDeg}deg)` }}>
+        <div
+          className="inner-circle"
+          style={{
+            transform: `rotate(${-rotationDeg}deg)`,
+            backgroundColor: innerCircleColor,
+          }}
+        >
           <img
             src={ALIEN_IMAGES[ALIENS[currentAlien]]}
             alt={ALIENS[currentAlien]}
@@ -97,6 +128,16 @@ const OmnitrixClassic: React.FC = () => {
           />
         </div>
       </div>
+
+      {overlayColor && (
+        <div
+          className="overlay"
+          style={{
+            backgroundColor: overlayColor,
+            animation: "fadeInOut 2s forwards",
+          }}
+        />
+      )}
     </div>
   );
 };

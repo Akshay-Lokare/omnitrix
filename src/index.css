@@ -52,13 +52,13 @@
 .inner-circle {
   width: 270px;
   height: 270px;
-  background: #cfcfcf;
+  background: #baff13;
+  transition: background-color 0.3s ease;  
   border-radius: 50%;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 0 6px #8d8d8d;
 }
 
 .side-dot {
@@ -75,3 +75,29 @@
 .left   { top: 50%; left: -19px; transform: translateY(-50%); }
 .right  { top: 50%; right: -19px; transform: translateY(-50%); }
 
+
+.overlay {
+  position: fixed;       /* Fixed to cover entire screen */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;         /* Make sure this is above all other elements */
+  animation: fadeInOut 2s forwards;
+  pointer-events: none;  /* Optional: let clicks pass through */
+}
+
+.overlay.green {
+  background: #baff13;
+}
+
+.overlay.red {
+  background: red;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
