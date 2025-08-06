@@ -49,6 +49,20 @@
   align-items: center;
 }
 
+.outer-circle-af {
+  width: 350px;
+  height: 350px;
+  background: #222;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 0 8px #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
 .inner-circle {
   width: 270px;
   height: 270px;
@@ -74,6 +88,40 @@
 .bottom { left: 50%; bottom: -19px; transform: translateX(-50%); }
 .left   { top: 50%; left: -19px; transform: translateY(-50%); }
 .right  { top: 50%; right: -19px; transform: translateY(-50%); }
+
+.side-line {
+  position: absolute;
+  width: 12px;
+  height: 60px;
+  background: #888; /* grey */
+  transform: rotate(45deg);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* Diamond shape */
+  z-index: 2;
+}
+
+.top {
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+}
+
+.bottom {
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+}
+
+.left {
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%) rotate(85deg);
+}
+
+.right {
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%) rotate(85deg);
+}
 
 
 .overlay {
