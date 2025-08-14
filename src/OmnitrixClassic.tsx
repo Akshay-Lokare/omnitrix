@@ -109,10 +109,10 @@ const OmnitrixClassic: React.FC = () => {
         className="outer-circle"
         style={{ transform: `rotate(${rotationDeg}deg)` }}
       >
-        <div className="side-dot top" />
-        <div className="side-dot right" />
-        <div className="side-dot bottom" />
-        <div className="side-dot left" />
+        <div className="classic-side-dot c-top" />
+        <div className="classic-side-dot c-right" />
+        <div className="classic-side-dot c-bottom" />
+        <div className="classic-side-dot c-left" />
 
         <div
           className="inner-circle"

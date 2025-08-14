@@ -42,10 +42,10 @@ const OmnitrixAF: React.FC = () => {
   };
 
   const twistSounds = [
-    new Audio(`${soundsUrl}AF_twist.mp3`),
+    new Audio(`${soundsUrl}AF_twist_normalized.mp3`),
   ];
 
-  const transformationSound = new Audio(`${soundsUrl}AF_transformation.mp3`);
+  const transformationSound = new Audio(`${soundsUrl}AF_transformation_normalized.mp3`);
   const timeoutSound = new Audio(`${soundsUrl}AF_timeout.mp3`);
 
   const [currentAlien, setCurrentAlien] = useState(0);
