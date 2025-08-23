@@ -30,49 +30,79 @@
 }
 
 .center-container {
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fff;
+  height: 100vh;
 }
 
 .outer-circle {
-  width: 350px;
-  height: 350px;
-  background: #222;
-  border-radius: 50%;
   position: relative;
-  box-shadow: 0 0 0 8px #555;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: #1a1f26;
+  border: 8px solid #3a3f44;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.5s ease;
+  box-shadow: 0 0 40px rgba(0, 255, 80, 0.4);
 }
-
-.outer-circle-af {
-  width: 350px;
-  height: 350px;
-  background: #222;
-  border-radius: 50%;
-  position: relative;
-  box-shadow: 0 0 0 8px #555;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
 
 .inner-circle {
-  width: 270px;
-  height: 270px;
-  background: #baff13;
-  transition: background-color 0.3s ease;  
-  border-radius: 50%;
   position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: #baff13;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.8),
+              0 0 25px rgba(186, 255, 19, 0.8);
+  transition: background-color 0.3s ease;
+}
+
+.inner-circle img {
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.side-line {
+  position: absolute;
+  background: #6dfc4a;
+  box-shadow: 0 0 15px #6dfc4a;
+}
+.side-line.top,
+.side-line.bottom {
+  width: 60px;
+  height: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.side-line.top { top: -4px; }
+.side-line.bottom { bottom: -4px; }
+
+.side-line.left,
+.side-line.right {
+  width: 8px;
+  height: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.side-line.left { left: -4px; }
+.side-line.right { right: -4px; }
+
+.overlay {
+  animation: fadeInOut 2s forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  30% { opacity: 0.8; }
+  100% { opacity: 0; }
 }
 
 .classic-side-dot {
@@ -167,9 +197,55 @@
   background: red;
 }
 
-@keyframes fadeInOut {
-  0% { opacity: 0; }
-  20% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { opacity: 0; }
+/* Base ultimate fin - simple rectangle */
+.ultimate-side-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--length, 160px);
+  height: var(--thickness, 40px);
+  background: #1a1f26; /* base fill */
+  transform-origin: left center;
+
+  /* Step 1: rotate by direction (points line somewhere)
+     Step 2: translate outward
+     Step 3: twist in place */
+  transform: rotate(var(--direction, 0deg)) translateX(var(--offset, 140px)) rotate(var(--twist, 0deg));
+
+  border-radius: 12px;
+  box-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00;
 }
+
+/* Arms with custom values */
+.u-top-left {
+  --direction: -135deg;  /* main pointing direction */
+  --twist: 0deg;        /* small tilt */
+  --offset: 170px;
+  --length: 160px;
+  --thickness: 40px;
+}
+
+.u-top-right {
+  --direction: -45deg;
+  --twist: -2deg;
+  --offset: 170px;
+  --length: 165px;
+  --thickness: 40px;
+}
+
+.u-bottom-right {
+  --direction: 35deg;
+  --twist: 6deg;
+  --offset: 140px;
+  --length: 160px;
+  --thickness: 40px;
+}
+
+.u-bottom-left {
+  --direction: 145deg;
+  --twist: -10deg;
+  --offset: 140px;
+  --length: 160px;
+  --thickness: 40px;
+}
+

@@ -62,7 +62,7 @@ const OmnitrixAF: React.FC = () => {
   };
 
   const playTransformationSound = () => {
-    transformationSound.currentTime = 0;
+    //transformationSound.currentTime = 0;
     transformationSound.play();
   };
 

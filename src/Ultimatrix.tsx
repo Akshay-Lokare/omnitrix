@@ -133,10 +133,22 @@ const Ultimatrix: React.FC = () => {
   return (
     <div className="center-container">
       <div className="outer-circle" style={{ transform: `rotate(${rotationDeg}deg)` }}>
+        {/* Default 4 lines */}
         <div className="side-line top" />
         <div className="side-line right" />
         <div className="side-line bottom" />
         <div className="side-line left" />
+
+        {/* Extra 4 diagonal lines when ultimate is activated */}
+        {activationStage === 2 && (
+          <>
+            <div className="ultimate-side-line u-top-left"></div>
+            <div className="ultimate-side-line u-top-right"></div>
+            <div className="ultimate-side-line u-bottom-left"></div>
+            <div className="ultimate-side-line u-bottom-right"></div>
+          </>
+        )}
+
 
         <div
           className="inner-circle"
@@ -152,6 +164,7 @@ const Ultimatrix: React.FC = () => {
           />
         </div>
       </div>
+
 
       {overlayColor && (
         <div
